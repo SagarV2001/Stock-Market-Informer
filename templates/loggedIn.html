@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Stock Market Informer</title>
+        <link rel="stylesheet" type="text/css" href="/static/style.css">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz@6..12&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <img class="bg-img"src="https://img-c.udemycdn.com/course/750x422/4584796_378d_4.jpg">
+        <!--used for notification-->
+        {% if msg%}
+        <p class = "hidden-message-for-javascript">{{msg}}</p>
+        {%endif%}
+        <!--used for notification-->
+        <div class="container">
+            <ul class = "navbar">
+                <li class = "navbar-item">About Us</li>
+                <li class = "navbar-item">Terms And Conditions</li>
+                <li class = "navbar-item">Resources</li>
+                <li class = "navbar-item">
+                    <form action="/log-out" method="post">
+                        <input class="login-logout-signup-button" type="submit" value="Log Out"/>
+                    </form>
+                </li>
+            </ul>
+            <div class="main">
+                <ul class="stock-list">
+                    <div class="stock-list-item-label-head">
+                        <div class="stock-data" >Stock Name</div>
+                        <div class="stock-data" >Current Price</div>
+                        <div class="last-change" >Last Change</div>
+                        <div class="stock-data" >Date</div>
+                        <div class="long-term-change" >Long Term Change</div>
+                        <div class="monthly-change" >Monthly</div>
+                        <div class="stock-data" >Amount</div>
+                    </div>
+                    {% if data is mapping%}
+                    {% for key,val in data.items(): %}
+                    <div class="stock-list-item-label">
+                        <div class="stock-data">{{key}}</div>
+                        <div class="stock-data">{{val['current_price']}}</div>
+                        {% if val['last_change'] | float < 0 %}
+                        <div class="last-change" style="color:red">{{val['last_change']}}</div>
+                        {% else %}
+                        <div class="last-change" style="color:green">+{{val['last_change']}}</div>
+                        {% endif %}
+                        <div class="stock-data">{{val['last_invested_at']}}</div>
+                        {% if val['long_term_change'] | float < 0 %}
+                        <div class="long-term-change" style="color:red;">{{val['long_term_change']}}</div>
+                        {% else %}
+                        <div class="long-term-change" style="color:green;">+{{val['long_term_change']}}</div>
+                        {% endif %}
+                        {% if val['monthly_change'] | float < 0 %}
+                        <div class="monthly-change" style="color:red;">{{val['monthly_change']}}</div>
+                        {% else %}
+                        <div class="monthly-change" style="color:green;">+{{val['monthly_change']}}</div>
+                        {% endif %}
+                        <div class="stock-data">{{val['invested_amount']}}</div>
+                        <form action="/delete-stock-{{key}}" method="post">
+                            <button class="stock-delete-button" type="submit"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+                <br>
+                <div class="input-data">
+                    <form action="/add-data" method="post">
+                        <label class="input-label">Enter Data:</label>
+                        <input class="input-text-box" name="data" type="text" placeholder="ie: I invested 1000 on TSLA on 13th"/>
+                        <input class="add-stock-data-button" value="Add Record" type="submit"/>
+                    </form>
+                </div>
+            </div>
+            <div class="footer">
+                <p class="know-more">KNOW MORE!!</p>
+            </div>
+        </div>
+    <script src="/static/master.js"></script>
+    </body>
+</html>

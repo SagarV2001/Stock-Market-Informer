@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Stock Market Informer</title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/login-page.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz@6..12&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <img class="bg-img"src="https://img-c.udemycdn.com/course/750x422/4584796_378d_4.jpg">
+        <div class="login-signup-container">
+            <p class="verify-email-text">A verification email is sent to your email id. Please verify by Entering OTP.</p>
+            {% if error_message %}
+            <br>
+            <p style="color: red;">{{ error_message }}</p>
+            <br>
+            {% endif %}
+            <div class="login-register-box">
+                <form method="post" action="/verified-user">
+                    <input class="text-box" type="text" name="otp" />
+                    <input class="login-logout-signup-button" type="submit" value="check otp">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

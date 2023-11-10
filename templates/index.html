@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/style.css">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300&display=swap" rel="stylesheet">
+        <title>Stock Market Informer</title>
+    </head>
+    <body>
+        <img class="bg-img"src="https://img-c.udemycdn.com/course/750x422/4584796_378d_4.jpg">
+        <!--used for notification-->
+        {% if msg%}
+        <p class = "hidden-message-for javascript">{{msg}}</p>
+        {%endif%}
+        <!--used for notification-->
+        <ul class = "navbar">
+            <li class = "navbar-item">About Us</li>
+            <li class = "navbar-item">Terms And Conditions</li>
+            <li class = "navbar-item">Resources</li>
+            <li class = "navbar-item">
+                <form method="post">
+                    <input class="login-logout-signup-button" name="login-button" type="submit" value="Login" formaction="/login"/>
+                    <input class="login-logout-signup-button" name="signup-button" type="submit" value="SignUp" formaction="/register"/>
+                </form>
+            </li>
+        </ul>
+        <div class="main">
+
+        </div>
+        <div class="footer">
+
+        </div>
+    </body>
+</html>
